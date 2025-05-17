@@ -5,7 +5,7 @@ export default function Subscription() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data: any) => {
-        fetch('/api/subscribe', {
+        fetch('http://localhost:3000/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -14,9 +14,17 @@ export default function Subscription() {
         })
         .then(response => response.json())
         .then((data) => {
-            if(data.success) {
-                toast("Subscribed", {
-                    description: "You will be contacted by our team soon",
+            if(data.code === 200) {
+                toast.success("Subscribed", {
+                    description: "You are now subscribed to our newsletter,check your mailbox",
+                  });
+            }else if(data.code === 409){
+                toast.warning("Already Subscribed", {
+                    description: "You are already subscribed to our newsletter",
+                })
+            } else {
+                toast.error("Error", {
+                    description: "Something went wrong",
                   });
             }
         })
