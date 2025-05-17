@@ -1,36 +1,73 @@
+import { useForm } from 'react-hook-form';
+
 export default function ContactUs() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => console.log(data);
+
   return (
     <div className="flex flex-col items-center pt-10 w-full bg-gray-300 h-screen">
-        <div className="h-[20vh] text-center">
+      <div className="h-[20vh] text-center">
         <h1 className="text-2xl font-bold mb-4 ">CONTACT US</h1>
         <p className="text-lg font-light">
-            If you have any questions or inquiries, please don't hesitate to contact
-            us.
+          If you have any questions or inquiries, please don't hesitate to
+          contact us.
         </p>
-        </div>
-      
+      </div>
+
       <div className="w-full grid grid-cols-2 gap-4 mt-4">
         {/* left side form */}
-        <form className="flex flex-col space-y-4 p-4 bg-white rounded-md shadow-sm ml-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col space-y-4 p-4 bg-white rounded-md shadow-sm ml-4"
+        >
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Enter your name"
+            {...register('name', { required: true })}
             className="p-2 border border-gray-300 rounded-md"
           />
+          {errors.name && (
+            <span className="text-red-500 text-sm">
+              This field is required
+            </span>
+          )}
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Enter your email"
+            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
             className="p-2 border border-gray-300 rounded-md"
           />
+          {errors.email && (
+            <span className="text-red-500 text-sm">
+              Please enter a valid email address
+            </span>
+          )}
           <input
             type="text"
-            placeholder="Subject"
+            placeholder="Enter Subject"
+            {...register('subject', { required: true })}
             className="p-2 border border-gray-300 rounded-md"
           />
+          {errors.subject && (
+            <span className="text-red-500 text-sm">
+              This field is required
+            </span>
+          )}
           <textarea
-            placeholder="Message"
+            placeholder="Enter Message"
+            {...register('message', { required: true })}
             className="p-2 border border-gray-300 rounded-md"
           />
+          {errors.message && (
+            <span className="text-red-500 text-sm">
+              This field is required
+            </span>
+          )}
           <button
             type="submit"
             className="p-2 bg-blue-500 text-white rounded-md"
@@ -58,3 +95,4 @@ export default function ContactUs() {
     </div>
   );
 }
+
