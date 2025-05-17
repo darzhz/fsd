@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { Toaster } from './ui/sonner';
 
 export default function ContactUs() {
   const {
@@ -7,10 +9,15 @@ export default function ContactUs() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    toast("Your message has been sent", {
+        description: "You will be contacted by our team soon",
+      });
+  }
 
   return (
     <div className="flex flex-col items-center pt-10 w-full bg-gray-300 h-screen">
+        <Toaster/>
       <div className="h-[20vh] text-center">
         <h1 className="text-2xl font-bold mb-4 ">CONTACT US</h1>
         <p className="text-lg font-light">

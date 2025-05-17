@@ -3,6 +3,8 @@ import { NavbarHex } from './components/NavBar'
 import { CustomImageSlider } from './components/ui/CustomImageSlider'
 import { motion } from 'motion/react'
 import ContactUs from './components/ContactUs'
+import { Subscript } from 'lucide-react'
+import Subscription from './components/Subscription'
 
 function App() {
   const Images = [
@@ -42,6 +44,7 @@ function App() {
       </motion.div>
       </CustomImageSlider>
       <ContactUs/>
+      <Subscription/>
     </>
   )
 }
